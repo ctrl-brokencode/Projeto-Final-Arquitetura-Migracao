@@ -37,13 +37,13 @@ Como primeira etapa, faremos uma migração "*lift-and-shift*" ou "*as-is*":
 - **As-is** é uma expressão em inglês que quer dizer "como está".
 - **Lift and Shift** é uma estratégia de migração de um sistema e seus dados para a nuvem, sem grandes mudanças.
 
-Dito isso, faremos uma migração para a nuvem, sem alterar os dados existentes. Antes de fazermos essa migração, primeiro precisamos preparar o ambiente e garantir que o servidor local possa se conectar devidamente com a nuvem AWS. Com o ambiente pronto, partiremos para a fase de testes, onde as instâncias, iguais aos [servidores citados antes](#detalhes-da-atividade), serão criadas, junto de seus volumes
+Dito isso, faremos uma migração para a nuvem, sem alterar os dados existentes. Antes de fazermos essa migração, primeiro precisamos preparar o ambiente e garantir que o servidor local possa se conectar devidamente com a nuvem AWS. Com o ambiente pronto, partiremos para a fase de testes, onde as instâncias, iguais aos [servidores citados antes](#detalhes-da-atividade), serão criadas, junto de seus volumes.
 
 # 1 - Instalação do Agente
 
 Pra começar, precisamos instalar um agente de migração, o *AWS Migration Agent*, em cada máquina do servidor. Ele se conectará com a API do serviço *AWS Application Migration Service* (*AWS MGN*) e vai utilizar uma sub-rede (especificada no console, na página do serviço) para criar os recursos de preparação. 
 
-Com a instalação do agente nas máquinas, ele vai procurar pelos volumes existentes e a criação dos recursos para fazer a replicação. Os recursos consistem em:
+Com a instalação do agente nas máquinas, ele vai procurar pelos volumes existentes, enquanto os recursos para fazer a replicação serão criados. Os recursos consistem em:
 
 - **Replication Server**: Instância EC2 (**t3.small** por padrão) para cada servidor;
 - **Staging Volumes**: Volumes EBS de baixo custo, com o mesmo tamanho dos volumes de origem;
@@ -65,6 +65,9 @@ Essa sincronização é iniciada após a instalação do agente e a criação do
 
 Após a sincronização incial, o status do servidor será atualizado para *Ready for Testing* (Pronto para teste). Executando a instância de teste, o *AWS MGN* criará mais uma instância EC2 (**t3.medium** como padrão) chamada de *Conversion Server* (Servidor de Conversão). É ele que fará processos como alteração de licenças de drivers, rede e sistema operacional, para que o servidor seja executado de forma nativa na AWS.
  
+**Observação**: O servidor Frontend possui 2GB RAM e 1 Core CPU, enquanto o Backend possui 4GB RAM e 2 Core CPU.
+Os tipos de instâncias finais serão de **t2.small** e **t2.medium** respectivamente. Esses tipos correspondem com o desempenho que já tinha localmente.
+
 Caso nenhum erro ocorra,  a instância de teste terá seu status de execução definido como *Succeeded* (Bem-sucedido). Logo, o teste pode ser encerrado e começar a etapa de substituição (*cutover*). Novamente, caso nenhum erro ocorra, a migração foi feita com sucesso.
 
 ![Diagrama das sub-redes de preparação e migração](./images/create_migration_resources.png)
@@ -93,5 +96,9 @@ Informe esses 3 parâmetros para o *Database Migration Task* e a replicação ir
 + https://docs.aws.amazon.com/mgn/latest/ug/replication-server-settings.html
 
 # Conclusão
+
+Aqui se encontra o diagrama final, contendo todas as partes unidas.
+
+![Diagrama de todo o processo de migração com MGN e DMS](./images/full_migration.png)
 
 A etapa do MGN se mostra mais complexa, pois envolve a replicação de toda a infraestrutura da máquina, incluindo o sistema operacional, aplicativos, dados e configurações. O serviço também precisa garantir que a instância replicada na AWS funcione em um ambiente diferente. O DMS, por outro lado, é otimizada para lidar apenas com os bancos de dados, tornando a migração relativamente rápida.
