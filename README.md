@@ -1,4 +1,4 @@
-# Projeto Migração de Banco de Dados 
+# Projeto Arquitetura de Migração de um Sisteme On-Premise
 
 Este projeto foi organizado pela Compass UOL com objetivo de estruturar um diagrama sobre o processo de migração de um servidor On-Premise para a nuvem AWS.
 
@@ -9,10 +9,6 @@ Este projeto foi organizado pela Compass UOL com objetivo de estruturar um diagr
 O contexto do projeto basicamente se passa numa empresa que busca uma solução sobre o sistema eCommerce. Este sistema não está mais atendendo o aumento da demanda de acessos e compras, sendo necessário uma migração dos servidores para a nuvem AWS, que por sua vez oferece melhores opções de capacidade e escalabilidade, além de deixar todo o sistema seguro e resiliente.
 
 O servidor atual consiste em:
-- 01 Banco de Dados (MySQL) 
-- - 500GB de dados
-- - 10GB RAM
-- - 3 Core CPU
 - 01 servidor Frontend (REACT)
 - - 5GB de dados
 - - 2GB RAM
@@ -21,6 +17,10 @@ O servidor atual consiste em:
 - - 5GB de dados
 - - 4GB RAM
 - - 2 Core CPU
+- 01 Banco de Dados (MySQL) 
+- - 500GB de dados
+- - 10GB RAM
+- - 3 Core CPU
 
 ![Diagrama do sistema local](./images/servidor_local.png)
 
@@ -66,7 +66,7 @@ Essa sincronização é iniciada após a instalação do agente e a criação do
 Após a sincronização incial, o status do servidor será atualizado para *Ready for Testing* (Pronto para teste). Executando a instância de teste, o *AWS MGN* criará mais uma instância EC2 (**t3.medium** como padrão) chamada de *Conversion Server* (Servidor de Conversão). É ele que fará processos como alteração de licenças de drivers, rede e sistema operacional, para que o servidor seja executado de forma nativa na AWS.
  
 **Observação**: O servidor Frontend possui 2GB RAM e 1 Core CPU, enquanto o Backend possui 4GB RAM e 2 Core CPU.
-Os tipos de instâncias finais serão de **t2.small** e **t2.medium** respectivamente. Esses tipos correspondem com o desempenho que já tinha localmente.
+Os tipos de instâncias finais serão de **t2.small** e **t3.medium** respectivamente. Esses tipos correspondem com o desempenho que já tinha localmente.
 
 Caso nenhum erro ocorra,  a instância de teste terá seu status de execução definido como *Succeeded* (Bem-sucedido). Logo, o teste pode ser encerrado e começar a etapa de substituição (*cutover*). Novamente, caso nenhum erro ocorra, a migração foi feita com sucesso.
 
@@ -81,7 +81,7 @@ Como o servidor local possui um servidor MySQL, sua abordagem de migração ser�
 Antes de realizar a migração, você precisará de 3 itens:
 
 - Endpoint do banco de dados local (Conecte o banco de dados na VPC usando uma VPN ou *AWS Direct Connect*)
-- Endpoint da instância RDS que atuará como destino
+- Endpoint da instância RDS que atuará como destino (O tipo da instância é **db.t4g.large** - 8GB RAM e 2 Core CPU)
 - Instância de replicação (Pode ser criada no console, na página do DMS)
 
 **Observações**: O tamanho da instância de replicação deve ser dimensionada de forma adequada com base no tanto de dados que será migrado e na taxa de transferência adequada.
