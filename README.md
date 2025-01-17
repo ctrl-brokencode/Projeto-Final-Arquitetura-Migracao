@@ -60,7 +60,7 @@ Com a instalação do agente nas máquinas, ele vai procurar pelos volumes exist
 
 ![Diagrama](./images/mgn_agent_and_resources.png)
 
-# 2 - *Inital Sync* (Sincronização Inicial)
+# 2 - *Initial Sync* (Sincronização Inicial)
 
 Essa sincronização é iniciada após a instalação do agente e a criação dos recursos na sub-rede de preparação. Os dados são enviados diretamente dos servidores de origem para os servidores de replicação, criptografados e comprimidos em trânsito usando TLS AES-256 bits. Estes também serão replicados de forma contínua. Essa etapa também realiza uma série de tarefas, como:
 
@@ -102,7 +102,7 @@ Informe esses 3 parâmetros para o *Database Migration Task* e a replicação ir
 
 # Precificação
 
-O valor total mensal desses serviços ficou **671,54 USD**, porém essa estimativa inclui todos os serviços de migração. Acredito que não passará de 5 dias para esse processo, então os Replication Servers, o Conversion Server e os Staging Volumes serão deletados logo após.
+O valor total mensal desses serviços ficou **671,54 USD**, porém essa estimativa inclui todos os serviços de migração temporários. Então os Replication Servers, o Conversion Server e os Staging Volumes serão deletados logo após.
 
 ![Tabela de preços de todos os serviços usados para as migrações](./images/aws_precos.jpg)
 
@@ -121,4 +121,4 @@ Aqui se encontra o diagrama final, contendo todas as partes unidas.
 
 ![Diagrama de todo o processo de migração com MGN e DMS](./images/full_migration.png)
 
-A etapa do MGN se mostra mais complexa, pois envolve a replicação de toda a infraestrutura da máquina, incluindo o sistema operacional, aplicativos, dados e configurações. O serviço também precisa garantir que a instância replicada na AWS funcione em um ambiente diferente. O DMS, por outro lado, é otimizada para lidar apenas com os bancos de dados, tornando a migração relativamente rápida.
+A etapa de migração dos servidores se mostra mais complexa, pois envolve a replicação de toda a infraestrutura das máquinas, incluindo sistema operacional, dados e configurações. O serviço também precisa garantir que a instância replicada na AWS funcione em um ambiente diferente. O DMS, por outro lado, é otimizada para lidar apenas com os bancos de dados, tornando a migração relativamente mais rápida.
