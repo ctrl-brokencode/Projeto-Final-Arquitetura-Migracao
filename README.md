@@ -52,7 +52,7 @@ Dito isso, faremos uma migração para a nuvem, sem alterar os dados existentes.
 
 # 1 - Instalação do agente de migração
 
-Pra começar, precisamos instalar um agente de migração, o *AWS Migration Agent*, em cada máquina do servidor. Ele se conectará com a API do serviço *AWS Application Migration Service* (*AWS MGN*) e vai utilizar uma sub-rede (especificada no console, na página do serviço) para criar os recursos de preparação. 
+Pra começar, precisamos instalar um agente de migração, o *AWS Migration Agent*, em cada máquina do servidor. Ele se conectará com a API do serviço *AWS Application Migration Service* (*AWS MGN* via TCP 443) e vai utilizar uma sub-rede (especificada no console, na página do serviço) para criar os recursos de preparação. 
 
 Com a instalação do agente nas máquinas, ele vai procurar pelos volumes existentes, enquanto os recursos para fazer a replicação serão criados. Os recursos consistem em:
 
@@ -63,7 +63,7 @@ Com a instalação do agente nas máquinas, ele vai procurar pelos volumes exist
 
 # 2 - *Initial Sync* (Sincronização Inicial)
 
-Essa sincronização é iniciada após a instalação do agente e a criação dos recursos na sub-rede de preparação. Os dados são enviados diretamente dos servidores de origem para os servidores de replicação, criptografados e comprimidos em trânsito usando TLS AES-256 bits. Estes também serão replicados de forma contínua. Essa etapa também realiza uma série de tarefas, como:
+Essa sincronização é iniciada após a instalação do agente e a criação dos recursos na sub-rede de preparação. Os dados são enviados diretamente dos servidores de origem para os servidores de replicação (via TCP 1500), criptografados e comprimidos em trânsito usando TLS AES-256 bits. Estes também serão replicados de forma contínua. Essa etapa também realiza uma série de tarefas, como:
 
 - Criação de regras de firewall
 - Inicialização do servidor de replicação
