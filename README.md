@@ -123,3 +123,7 @@ Aqui se encontra o diagrama final, contendo todas as partes unidas.
 ![Diagrama de todo o processo de migração com MGN e DMS](./images/full_migration.png)
 
 A etapa de migração dos servidores se mostra mais complexa, pois envolve a replicação de toda a infraestrutura das máquinas, incluindo sistema operacional, dados e configurações. O serviço também precisa garantir que a instância replicada na AWS funcione em um ambiente diferente. O DMS, por outro lado, é otimizada para lidar apenas com os bancos de dados, tornando a migração relativamente mais rápida.
+
+# Modernização
+
+A documentação da etapa de modernização em Kubernetes se encontra [aqui](https://github.com/Anaellen123/Project-EKS)!
