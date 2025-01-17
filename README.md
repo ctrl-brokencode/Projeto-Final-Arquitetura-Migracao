@@ -38,7 +38,7 @@ O servidor atual consiste em:
 
 ## ⚠ IMPORTANTE!
 
-Este trabalho será dividido em duas etapas. Essa documentação só vai abordar a etapa de **migração**. Ao final, terá um link com a segunda parte, a de modernização, pertencente à minha dupla do trabalho.
+Este trabalho será dividido em duas etapas. Essa documentação só vai abordar a etapa de **migração**. Aqui está o link da parte de [**Modernização**](https://github.com/Anaellen123/Project-EKS), pertencente à minha dupla.
 
 # Lift-and-shift / As-is - Como vai funcionar?
 
