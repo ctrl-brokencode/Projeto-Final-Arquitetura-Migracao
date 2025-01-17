@@ -1,4 +1,4 @@
-# Projeto Arquitetura de Migração de um Sisteme On-Premise
+# Projeto Arquitetura de Migração de um Sistema On-Premise
 
 Este projeto foi organizado pela Compass UOL com objetivo de estruturar um diagrama sobre o processo de migração de um servidor On-Premise para a nuvem AWS.
 
@@ -66,7 +66,7 @@ Essa sincronização é iniciada após a instalação do agente e a criação do
 Após a sincronização incial, o status do servidor será atualizado para *Ready for Testing* (Pronto para teste). Executando a instância de teste, o *AWS MGN* criará mais uma instância EC2 (**t3.medium** como padrão) chamada de *Conversion Server* (Servidor de Conversão). É ele que fará processos como alteração de licenças de drivers, rede e sistema operacional, para que o servidor seja executado de forma nativa na AWS.
  
 **Observação**: O servidor Frontend possui 2GB RAM e 1 Core CPU, enquanto o Backend possui 4GB RAM e 2 Core CPU.
-Os tipos de instâncias finais serão de **t2.small** e **t3.medium** respectivamente. Esses tipos correspondem com o desempenho que já tinha localmente.
+Os tipos de instâncias finais serão de **t3.small** e **t3.medium** respectivamente. Esses tipos correspondem com o desempenho que já tinha localmente.
 
 Caso nenhum erro ocorra,  a instância de teste terá seu status de execução definido como *Succeeded* (Bem-sucedido). Logo, o teste pode ser encerrado e começar a etapa de substituição (*cutover*). Novamente, caso nenhum erro ocorra, a migração foi feita com sucesso.
 
@@ -90,10 +90,16 @@ Informe esses 3 parâmetros para o *Database Migration Task* e a replicação ir
 
 ![Diagrama do processo de migração de banco de dados](./images/dms_process.png)
 
+# Precificação
+
+
+
 # Referências
 
 + https://docs.aws.amazon.com/pt_br/mgn/latest/ug/mgn-connector-architecture.html
 + https://docs.aws.amazon.com/mgn/latest/ug/replication-server-settings.html
++ https://explore.skillbuilder.aws/learn/course/external/view/elearning/10343/aws-application-migration-service-aws-mgn-a-technical-introduction-portuguese
++ https://www.youtube.com/watch?v=1KG4wHbnjqc
 
 # Conclusão
 
