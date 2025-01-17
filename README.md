@@ -39,7 +39,7 @@ O sistema atual consiste em:
 
 ## ⚠ IMPORTANTE!
 
-Este trabalho será dividido em duas etapas. Essa documentação só vai abordar a etapa de **migração**. Aqui está o link da parte de [**Modernização**](https://github.com/Anaellen123/Project-EKS), pertencente à minha dupla.
+Este trabalho será dividido em duas etapas. Essa documentação só vai abordar a etapa de **migração**. O link da parte de **Modernização** se encontra no final dessa documentação.
 
 # Lift-and-shift / As-is - Como vai funcionar?
 
