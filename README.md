@@ -4,6 +4,16 @@ Este projeto foi organizado pela Compass UOL com objetivo de estruturar um diagr
 
 # Índice
 
+- [Detalhes da Atividade](#detalhes-da-atividade)
+- [Lift and Shift / As-is](#lift-and-shift--as-is---como-vai-funcionar)
+- [1 - Instalação do agente de migração](#1---instalação-do-agente-de-migração)
+- [2 - Initial Sync](#2---inital-sync-sincronização-inicial)
+- [3 - Instâncias de teste e substituição](#3---instâncias-de-teste-e-substituição)
+- [4 - Migração do banco de dados](#4---migração-do-banco-de-dados)
+- [Precificação](#precificação)
+- [Referências](#referências)
+- [Conclusão](#conclusão)
+
 # Detalhes da Atividade
 
 O contexto do projeto basicamente se passa numa empresa que busca uma solução sobre o sistema eCommerce. Este sistema não está mais atendendo o aumento da demanda de acessos e compras, sendo necessário uma migração dos servidores para a nuvem AWS, que por sua vez oferece melhores opções de capacidade e escalabilidade, além de deixar todo o sistema seguro e resiliente.
@@ -39,7 +49,7 @@ Como primeira etapa, faremos uma migração "*lift-and-shift*" ou "*as-is*":
 
 Dito isso, faremos uma migração para a nuvem, sem alterar os dados existentes. Antes de fazermos essa migração, primeiro precisamos preparar o ambiente e garantir que o servidor local possa se conectar devidamente com a nuvem AWS. Com o ambiente pronto, partiremos para a fase de testes, onde as instâncias, iguais aos [servidores citados antes](#detalhes-da-atividade), serão criadas, junto de seus volumes.
 
-# 1 - Instalação do Agente
+# 1 - Instalação do agente de migração
 
 Pra começar, precisamos instalar um agente de migração, o *AWS Migration Agent*, em cada máquina do servidor. Ele se conectará com a API do serviço *AWS Application Migration Service* (*AWS MGN*) e vai utilizar uma sub-rede (especificada no console, na página do serviço) para criar os recursos de preparação. 
 
@@ -61,7 +71,7 @@ Essa sincronização é iniciada após a instalação do agente e a criação do
 - Criação de volumes de preparação
 - Estabilização de comunicação entre o agente e o servidor de replicação
 
-# 3 - Executando instâncias de teste e substituição
+# 3 - Instâncias de teste e substituição
 
 Após a sincronização incial, o status do servidor será atualizado para *Ready for Testing* (Pronto para teste). Executando a instância de teste, o *AWS MGN* criará mais uma instância EC2 (**t3.medium** como padrão) chamada de *Conversion Server* (Servidor de Conversão). É ele que fará processos como alteração de licenças de drivers, rede e sistema operacional, para que o servidor seja executado de forma nativa na AWS.
  
