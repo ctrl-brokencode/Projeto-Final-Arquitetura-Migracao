@@ -81,7 +81,7 @@ Como o servidor local possui um servidor MySQL, sua abordagem de migração ser�
 Antes de realizar a migração, você precisará de 3 itens:
 
 - Endpoint do banco de dados local (Conecte o banco de dados na VPC usando uma VPN ou *AWS Direct Connect*)
-- Endpoint da instância RDS que atuará como destino (O tipo da instância é **db.t4g.large** - 8GB RAM e 2 Core CPU)
+- Endpoint da instância RDS que atuará como destino (O tipo da instância é **db.m6g.large** - 8GB RAM e 2 Core CPU)
 - Instância de replicação (Pode ser criada no console, na página do DMS)
 
 **Observações**: O tamanho da instância de replicação deve ser dimensionada de forma adequada com base no tanto de dados que será migrado e na taxa de transferência adequada.
@@ -92,7 +92,11 @@ Informe esses 3 parâmetros para o *Database Migration Task* e a replicação ir
 
 # Precificação
 
+O valor total mensal desses serviços ficou **671,54 USD**, porém essa estimativa inclui todos os serviços de migração. Acredito que não passará de 5 dias para esse processo, então os Replication Servers, o Conversion Server e os Staging Volumes serão deletados logo após.
 
+![Tabela de preços de todos os serviços usados para as migrações](./images/aws_precos.jpg)
+
+*(calculadora não deixou colocar na ordem 😅)*
 
 # Referências
 
