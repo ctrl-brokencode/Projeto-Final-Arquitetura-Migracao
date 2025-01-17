@@ -16,9 +16,10 @@ Este projeto foi organizado pela Compass UOL com objetivo de estruturar um diagr
 
 # Detalhes da Atividade
 
-O contexto do projeto basicamente se passa numa empresa que busca uma solução sobre o sistema eCommerce. Este sistema não está mais atendendo o aumento da demanda de acessos e compras, sendo necessário uma migração dos servidores para a nuvem AWS, que por sua vez oferece melhores opções de capacidade e escalabilidade, além de deixar todo o sistema seguro e resiliente.
+O contexto do projeto basicamente se passa numa empresa que busca uma solução sobre o sistema eCommerce. Este sistema não está mais atendendo o aumento da demanda de acessos e compras, sendo necessário uma migração do sistema para a nuvem AWS, que por sua vez oferece melhores opções de capacidade e escalabilidade, além de deixar todo o sistema seguro e resiliente.
 
-O servidor atual consiste em:
+O sistema atual consiste em:
+
 - 01 servidor Frontend (REACT)
 - - 5GB de dados
 - - 2GB RAM
